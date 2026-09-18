@@ -8,7 +8,7 @@ The analysis focuses on four questions:
 
 1. Where is customer-support demand concentrated?
 2. Which ticket types are associated with weaker recorded customer satisfaction?
-3. How does recorded CSAT vary by support channel?
+3. What is the buying habit as per the age group?
 4. Where is unresolved priority workload accumulating?
 
 ## 2. Dataset
