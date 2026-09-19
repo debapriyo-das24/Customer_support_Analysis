@@ -2,33 +2,32 @@
 
 ## 1. Objective
 
-This project analyses a validated customer-support dataset from a customer-success / customer-operations perspective.
+This project analyses a validated customer-support dataset from a Customer Success / Customer Operations perspective.
 
-The analysis focuses on four questions:
+The analysis is organised into four monitoring areas:
 
-1. Where is customer-support demand concentrated?
-2. Which ticket types are associated with weaker recorded customer satisfaction?
-3. What is the buying habit as per the age group?
-4. Where is unresolved priority workload accumulating?
+1. **Demand:** Where is support volume concentrated?
+2. **Customer experience:** Where do recorded CSAT and low-CSAT rates differ across ticket types and channels?
+3. **Observed product mix by age group:** How does the product mix represented in support interactions vary across customer age groups?
+4. **Operational risk:** Where is unresolved priority workload accumulating?
 
-## 2. Dataset
+## 2. Dataset snapshot
 
-- Total tickets: **8,469**
-- Ticket statuses:
-  - Closed: **2,769**
-  - Open: **2,819**
-  - Pending Customer Response: **2,881**
-- Closure rate: **32.70%**
-- Open/Pending rate: **67.30%**
-- Recorded CSAT responses: **2,769**
-- CSAT response rate: **32.70%**
-- Average recorded CSAT: **2.99 / 5**
-- Low-CSAT responses (1–2): **39.80%** of recorded CSAT responses
-- High/Critical Open/Pending tickets: **2,783**
+| Metric | Value |
+|---|---:|
+| Total tickets | **8,469** |
+| Closed | **2,769** |
+| Open | **2,819** |
+| Pending Customer Response | **2,881** |
+| Closure rate | **32.70%** |
+| Open/Pending rate | **67.30%** |
+| Recorded CSAT responses | **2,769** |
+| CSAT response rate | **32.70%** |
+| Average recorded CSAT | **2.99 / 5** |
+| Low-CSAT responses (1–2) | **39.80%** of recorded responses |
+| High/Critical Open/Pending | **2,783** |
 
-## 3. Product-category demand
-
-Across all tickets, the largest product-category volumes are:
+## 3. Demand by product category
 
 | Product Category | Tickets |
 |---|---:|
@@ -38,11 +37,9 @@ Across all tickets, the largest product-category volumes are:
 | Smart Home | 865 |
 | Smartphones | 826 |
 
-This segmentation reduces dozens of individual product names into a smaller set of categories that can be monitored at a management level.
+The category layer reduces individual product names into broader segments that can be monitored at a management level.
 
-Among tickets with recorded CSAT, the category-level CSAT results should be interpreted together with ticket volume because some categories have substantially fewer observations.
-
-## 4. Customer-experience friction by ticket type
+## 4. Customer experience by ticket type
 
 Among tickets with recorded CSAT:
 
@@ -54,11 +51,9 @@ Among tickets with recorded CSAT:
 | Cancellation request | 516 | 3.03 | 38.37% |
 | Product inquiry | 533 | 3.02 | 37.34% |
 
-Refund requests have the highest observed low-CSAT rate in this dataset. Billing inquiries and technical issues also show relatively high low-CSAT rates.
+Refund requests have the highest observed low-CSAT rate in this dataset. These are descriptive associations, not evidence that ticket type causes dissatisfaction.
 
-These are associations in the dataset, not evidence that the ticket type itself causes dissatisfaction.
-
-## 5. Channel analysis
+## 5. Customer experience by channel
 
 Among tickets with recorded CSAT:
 
@@ -69,9 +64,37 @@ Among tickets with recorded CSAT:
 | Social media | 684 | 2.97 | 39.33% |
 | Chat | 674 | 3.08 | 36.35% |
 
-The channel comparison provides a practical customer-success monitoring view. Email has the highest low-CSAT share in the observed responses, while Chat has the highest average CSAT.
+The channel comparison provides a monitoring layer for customer operations. The figures describe this dataset's recorded responses and should not be treated as causal channel effects.
 
-## 6. Priority and unresolved workload
+## 6. Observed product mix by age group
+
+The dataset contains four age groups:
+
+| Age Group | Ticket Records |
+|---|---:|
+| Adult | 3,180 |
+| Senior Citizen | 2,560 |
+| Young Adult | 2,397 |
+| Teenager | 332 |
+
+The most represented category within each group is:
+
+| Age Group | Largest represented category | Share within group |
+|---|---|---:|
+| Adult | Gaming Consoles & Accessories | 13.81% |
+| Senior Citizen | Laptops & Computers | 14.06% |
+| Young Adult | Gaming Consoles & Accessories | 13.48% |
+| Teenager | Gaming Consoles & Accessories | 13.55% |
+
+The product mix is broad across all four groups, with Gaming Consoles & Accessories, Laptops & Computers and Cameras consistently among the largest represented categories.
+
+### Interpretation
+
+This analysis is deliberately labelled **observed product mix by age group**, not definitive "buying habits."
+
+The dataset records products associated with support tickets. It does not provide a complete record of all purchases made by every customer in each age group. Therefore, the results describe the support-ticket population represented in the dataset rather than population-wide purchasing behaviour.
+
+## 7. Operational risk
 
 | Priority | Total Tickets | Open/Pending |
 |---|---:|---:|
@@ -80,33 +103,28 @@ The channel comparison provides a practical customer-success monitoring view. Em
 | Medium | 2,192 | 1,498 |
 | Low | 2,063 | 1,419 |
 
-There are **2,783 High/Critical tickets in Open or Pending status**. This provides an operational-risk indicator that can be monitored alongside customer-experience metrics.
+There are **2,783 High/Critical tickets in Open or Pending status**, providing an operational-risk indicator alongside the customer-experience metrics.
 
-## 7. Data-quality considerations
+## 8. Data-quality considerations
 
-The validated dataset retains missing response/resolution timestamps rather than fabricating values.
+Missing response/resolution timestamps were retained rather than fabricated. Missing CSAT was likewise preserved as missing/non-response.
 
-The project also preserves the distinction between:
+This prevents incomplete operational records from being interpreted as zero response time, zero resolution time or a zero satisfaction score.
 
-- a customer interaction for which a timestamp was recorded, and
-- an interaction for which the timestamp is missing.
+## 9. Customer-success framework
 
-This prevents missing operational data from being interpreted as zero response or resolution time.
+The final analytical flow is:
 
-## 8. Customer-success interpretation
+**Demand → Experience → Customer segmentation → Operational risk**
 
-The analysis suggests three useful monitoring layers:
+- Product category shows where support demand is concentrated.
+- Ticket type and channel provide customer-experience views through recorded CSAT.
+- Age-group product mix adds a customer-segmentation lens.
+- Priority versus Open/Pending status highlights unresolved workload.
 
-**Demand:** product category and ticket type show where customer issues are concentrated.
+## 10. Limitations
 
-**Experience:** CSAT and low-CSAT rate indicate where customers may be experiencing more friction.
-
-**Operational risk:** unresolved High/Critical workload indicates where customer issues may require closer follow-up.
-
-Together, these metrics form a simple customer-success operations monitoring framework rather than a volume-only support report.
-
-## 9. Limitations
-
-- CSAT is available for only 32.70% of tickets, so CSAT-based conclusions represent the recorded-response population rather than every ticket.
-- This is a portfolio dataset and should not be interpreted as a direct representation of any real company's customer base or operating environment.
-- Correlation or association in these summaries should not be interpreted as causation.
+- CSAT is available for only 32.70% of all tickets, so CSAT findings represent the recorded-response population.
+- The source is a portfolio dataset and should not be interpreted as a direct representation of any specific company's customers.
+- Observed product mix by age group is not equivalent to population-wide buying behaviour.
+- Descriptive associations should not be interpreted as causal relationships.
